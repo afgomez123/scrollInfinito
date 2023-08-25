@@ -1,0 +1,19 @@
+/* Estilos específicos para el componente VideoItem */
+.video-item {
+  width: 200px;
+  height: 240px;
+  background-color: #231804;
+  padding: 10px;
+  text-align: center;
+}
+
+.video-item a {
+  display: block;
+  text-decoration: none;
+  color:white;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.video-item img {
+  max-width: 100%;
+}
