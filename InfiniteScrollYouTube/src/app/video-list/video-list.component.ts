@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { IVideo } from './video.model'; // Asegúrate de tener el modelo Video importado
+import { IVideo } from './video.model';
 import { GetYouTubeInfoService } from './get-you-tube-info.service';
 
 @Component({
@@ -13,33 +12,33 @@ export class VideoListComponent implements OnInit {
   nextPageToken: string | null = null;
   loading = false;
 
-  constructor(private http: HttpClient,private getYouTubeInfoService: GetYouTubeInfoService) {}
+  constructor(private getYouTubeInfoService: GetYouTubeInfoService) {}
 
   ngOnInit() {
     this.loadVideos();
   }
 
   private loadVideos() {
-    console.log('text');
     if (this.loading) return; // Evita múltiples cargas mientras se está cargando
 
     this.loading = true;
     const apiKey = 'AIzaSyBg9s2am-Ue8yB1FEd6XUf28rxp2IJSZpo';
     const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&type=video&q=hola`;
 
-    this.getYouTubeInfoService.getVideosInfo(apiUrl).subscribe((response: any) => {
-      // this.http.get(apiUrl).subscribe((response: any) => {
-      this.videos = this.videos.concat(
-        response.items.map((item: any) => ({
-          id: item.id.videoId,
-          title: item.snippet.title,
-          thumbnail: item.snippet.thumbnails.medium.url,
-        }))
-      );
-      this.nextPageToken = response.nextPageToken;
-      console.log(' this.nextPageToken', this.nextPageToken)
-      this.loading = false;
-    });
+    this.getYouTubeInfoService
+      .getVideosInfo(apiUrl)
+      .subscribe((response: any) => {
+        this.videos = this.videos.concat(
+          response.items.map((item: any) => ({
+            id: item.id.videoId,
+            title: item.snippet.title,
+            thumbnail: item.snippet.thumbnails.medium.url,
+          }))
+        );
+        this.nextPageToken = response.nextPageToken;
+        console.log(' this.nextPageToken', this.nextPageToken);
+        this.loading = false;
+      });
   }
 
   public onScroll() {
