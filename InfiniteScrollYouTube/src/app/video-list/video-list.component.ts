@@ -9,7 +9,6 @@ import { GetYouTubeInfoService } from './get-you-tube-info.service';
 })
 export class VideoListComponent implements OnInit {
   public videos: IVideo[] = [];
-  // nextPageToken: string | null = null;
   public loading = false;
 
   private apiKey = 'AIzaSyBsJndbYMao8FHGjqwmVblcKKLamsk2Vu4';
