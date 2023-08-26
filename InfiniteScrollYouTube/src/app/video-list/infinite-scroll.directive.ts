@@ -21,8 +21,10 @@ export class InfiniteScrollDirective {
     const windowHeight = window.innerHeight;
     const elementHeight = element.offsetHeight;
     const elementOffsetTop = element.offsetTop;
+    const isBotonReached = scrollTop + windowHeight >= elementOffsetTop + elementHeight - 100;
 
-    if (scrollTop + windowHeight >= elementOffsetTop + elementHeight - 100) {
+
+    if (isBotonReached) {
       this.scrolled.emit();
     }
   }
